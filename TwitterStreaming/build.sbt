@@ -11,3 +11,7 @@ libraryDependencies += "org.apache.spark" % "spark-streaming-twitter_2.11" % "1.
 
 libraryDependencies += "org.twitter4j" % "twitter4j-core" % "3.0.6"
 libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "3.0.6"
+
+libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.6.0"
+libraryDependencies += "org.mongodb.spark" %% "mongo-spark-connector" % "2.4.0"
+libraryDependencies += "org.mongodb" %% "casbah" % "3.0.0"
