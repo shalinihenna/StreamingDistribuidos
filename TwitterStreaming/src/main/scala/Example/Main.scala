@@ -3,6 +3,7 @@ package Example
 import com.mongodb.util.JSON
 import org.apache.spark.SparkContext._
 
+import org.mongodb.scala._
 import org.mongodb.scala.Document
 import org.mongodb.scala.{MongoClient, MongoCollection, MongoDatabase}
 //import org.apache.spark.streaming.{Seconds, StreamingContext}
@@ -36,12 +37,22 @@ object Main{
     filtered.foreachRDD{ x=>
       x.foreach{ x =>
         val mongoClient: MongoClient = MongoClient("mongodb://localhost:27017")
-        val database: MongoDatabase = mongoClient.getDatabase("streamingTwitter")
+        val database: MongoDatabase = mongoClient.getDatabase("distribuidos")
         val collection: MongoCollection[Document] = database.getCollection("tweets")
         val doc = Document("createdAt" -> x.getCreatedAt, "text" -> x.getText)
         println("PROBANDO DOC")
         println(doc)
-        collection.insertOne(doc)
+        collection.insertOne(doc).subscribe(new Observer[Completed] {
+            override def onNext(result: Completed): Unit = {
+                println("[+] successfully inserted")
+            }
+            override def onError(e: Throwable) = {
+                println("[!] error: " + e)
+            }
+            override def onComplete(): Unit = {
+                println("[?] completed: ")
+            }
+        })
         println("Se insertó")
         println("")
       }
