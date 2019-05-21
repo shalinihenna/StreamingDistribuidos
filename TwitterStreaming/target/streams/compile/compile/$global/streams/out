@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m/home/shalini/Escritorio/TwitterStreaming/src/main/scala/Example/Main.scala:18:19: not found: type StreamingContext[0m
+[0m[[0m[31merror[0m] [0m[0m    val ssc = new StreamingContext("local[*]", "Main", Seconds(1))[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/shalini/Escritorio/TwitterStreaming/src/main/scala/Example/Main.scala:18:56: not found: value Seconds[0m
+[0m[[0m[31merror[0m] [0m[0m    val ssc = new StreamingContext("local[*]", "Main", Seconds(1))[0m
+[0m[[0m[31merror[0m] [0m[0m                                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
