@@ -21,8 +21,11 @@ object Main {
     // Create a DStream from Twitter using our streaming context
     val tweets = TwitterUtils.createStream(ssc, None)
 
+    //Filters all tweets in spanish
+    val filtered = tweets.filter(_.getLang=="es")
+    
     // Now extract the text of each status update into RDD's using map()
-    val statuses = tweets.map(status => status.getText())
+    val statuses = filtered.map(status => status.getText())
     statuses.print()
 
     ssc.start()
