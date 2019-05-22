@@ -75,5 +75,7 @@ https://github.com/ehsanmx/Teispes-myblog
 ```
 Para el frontEnd:
 ```
-
+https://github.com/axios/axios
+https://www.freecodecamp.org/forum/t/how-to-use-setinterval-in-react/215072
+https://medium.com/@pedroparra/react-js-y-el-ciclo-de-vida-de-los-componentes-5d083e5089c6
 ```
