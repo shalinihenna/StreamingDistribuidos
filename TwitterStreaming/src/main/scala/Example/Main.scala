@@ -37,11 +37,34 @@ object Main{
     filtered.foreachRDD{ x=>
       x.foreach{ x =>
         val mongoClient: MongoClient = MongoClient("mongodb://localhost:27017")
-        val database: MongoDatabase = mongoClient.getDatabase("distribuidos")
+        val database: MongoDatabase = mongoClient.getDatabase("streamingTwitter")
         val collection: MongoCollection[Document] = database.getCollection("tweets")
-        val doc = Document("createdAt" -> x.getCreatedAt, "text" -> x.getText)
-        println("PROBANDO DOC")
-        println(doc)
+        val doc = Document(
+          "createdAt" -> x.getCreatedAt,
+          "text" -> x.getText,
+          "userName" -> x.getUser.getName,
+          "userScreenName" -> x.getUser.getScreenName,
+          "currentUserRetweetedId" -> x.getCurrentUserRetweetId,
+          "favoriteCount" -> x.getFavoriteCount,
+          "id" -> x.getId,
+          "inReplyToScreenName" -> x.getInReplyToScreenName,
+          "inReplyToStatusId" -> x.getInReplyToStatusId,
+          "lang" -> x.getLang,
+          "retweetCount" -> x.getRetweetCount,
+          "isFavorited" -> x.isFavorited,
+          "isPossiblySensitive" -> x.isPossiblySensitive,
+          "isRetweet" -> x.isRetweet,
+          "isRetweeted" -> x.isRetweeted,
+          "isRetweetedByMe" -> x.isRetweetedByMe,
+          "isTruncated" -> x.isTruncated,
+          "source" -> x.getSource
+          //"contributors" -> x.getContributors,
+          //"geoLocation" -> x.getGeoLocation,
+          //"place" -> x.getPlace,
+          //"retweetedStatus" -> x.getRetweetedStatus,
+          //"scopes" -> x.getScopes,
+
+          )
         collection.insertOne(doc).subscribe(new Observer[Completed] {
             override def onNext(result: Completed): Unit = {
                 println("[+] successfully inserted")
@@ -53,8 +76,6 @@ object Main{
                 println("[?] completed: ")
             }
         })
-        println("Se insertó")
-        println("")
       }
     }
 
