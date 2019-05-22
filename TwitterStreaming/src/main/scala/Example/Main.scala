@@ -26,12 +26,13 @@ object Main{
     // Create a DStream from Twitter using our streaming context
     val tweets = TwitterUtils.createStream(ssc, None)
 
-    //Filters all tweets in spanish
-    val filtered = tweets.filter(_.getLang=="es")
+    // Get Bag of words from Mongo
+    val words = getWords()
 
-    // // Now extract the text of each status update into RDD's using map()
-    // val statuses = filtered.map(status => status.getText())
-    // statuses.print()
+    // Filters all tweets in spanish and contains any of the words in the bag
+    val filtered = tweets.filter(status => {
+      (status.getLang=="es" && containsAnyWord(status.getText, words))
+    })
 
     //Connection and storage of tweets in mongoDB
     filtered.foreachRDD{ x=>

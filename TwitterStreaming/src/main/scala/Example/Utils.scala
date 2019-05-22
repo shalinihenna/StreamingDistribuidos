@@ -3,6 +3,9 @@ package Example
 import org.apache.log4j.Level
 import java.util.regex.Pattern
 import java.util.regex.Matcher
+import org.mongodb.scala._
+import scala.collection.mutable.ListBuffer
+import Example.Helpers._
 
 object Utils {
   /** Makes sure only ERROR messages get logged to avoid log spam. */
@@ -38,5 +41,28 @@ object Utils {
     val agent = "\"(.*?)\""
     val regex = s"$ip $client $user $dateTime $request $status $bytes $referer $agent"
     Pattern.compile(regex)
+  }
+
+  def getWords(): List[String] =  {
+    val mongoClient: MongoClient = MongoClient()
+    val database: MongoDatabase = mongoClient.getDatabase("distribuidos")
+
+    val collection: MongoCollection[Document] = database.getCollection("words")
+    val words = new ListBuffer[String]()
+
+    collection.find().results().map(
+      document => words += document.getString("value")
+    )
+
+    return words.toList
+  }
+
+  def containsAnyWord(text: String, words: List[String]): Boolean = {
+    for(word <- words){
+      if (text.contains(word)) {
+        return true
+      }
+    }
+    return false
   }
 }
