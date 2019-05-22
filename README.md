@@ -18,20 +18,21 @@ Se realiza la ingesta de datos a una base de datos y se disponibiliza una interf
 Uno de los principales inconvenientes que se detectaron en el desarrollo de este laboratorio fue el poco conocimiento que se tenia con respecto al lenguaje Scala. Esto retraso bastante el desarrollo porque hubieron problemas de instalación y uso del mismo.
 
 ### 4.2 Clases principales del desarrollo
-Dentro del Streaming de Twitter las clases importantes son:
+Dentro del Streaming de Twitter las clases y archivos importantes son:
 * TwitterStreaming/src/main/scala/Example/main.scala
 * TwitterStreaming/src/main/scala/Example/utils.scala
 
 Dentro de la API creada con scala las clases son:
 * /app/controllers/TweetController.scala
-* 
+* /conf/routes
 * app/utils/CorsFilter.scala
 
 Dentro del FrontEnd:
-* src\components\streaming\index.js
+* src/components/streaming/index.js
 
 ## 5. RESULTADOS
-En esta imagen se puede visualizar el FrontEnd de la plataforma, a través de la API creada, contiene los tweets obtenidos en tiempo real. 
+En esta imagen se puede visualizar, a través de la API creada, los tweets obtenidos en tiempo real, las cuales luego serán consumidas y mostradas por el FrontEnd.
+![alt text](https://github.com/shali7296/StreamingDistribuidos/blob/master/imagen1.jpg)
 
 ## 6. LINKS DEL SOFTWARE EN PRODUCCIÓN:
 ### 6.1 Servicios de BackEnd:
@@ -61,7 +62,7 @@ http://lab-2-distribuidos.eastus.cloudapp.azure.com/
                       o
 http://40.121.62.100/
 ```
-## 7. PASOS PARA DESPLEGAR EL SERVICIO DESDE CERO
+## 7. LINKS IMPORTANTES PARA INICIAR EL PROYECTO
 Para el streaming de Twitter se puede seguir el siguiente link:
 ```
 https://medium.com/@harinilabs/day-6-realtime-tweets-analysis-using-spark-streaming-with-scala-10a9937aae57
@@ -73,7 +74,7 @@ Para la creación de la API:
 https://github.com/ehsanmx/Teispes-myblog
 
 ```
-Para el frontEnd:
+Para el FrontEnd:
 ```
 https://github.com/axios/axios
 https://www.freecodecamp.org/forum/t/how-to-use-setinterval-in-react/215072
