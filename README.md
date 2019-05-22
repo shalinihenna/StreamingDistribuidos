@@ -63,6 +63,18 @@ http://lab-2-distribuidos.eastus.cloudapp.azure.com/
 http://40.121.62.100/
 ```
 ## 7. LINKS IMPORTANTES PARA INICIAR EL PROYECTO
+
+Repositorio para el frontend:
+
+```
+https://github.com/caDonoso/frontendSD.git
+```
+Repositorio para el backend (API):
+```
+https://github.com/d-salazar-se/lab-2-distribuidos-backend.git
+```
+
+
 Para el streaming de Twitter se puede seguir el siguiente link:
 ```
 https://medium.com/@harinilabs/day-6-realtime-tweets-analysis-using-spark-streaming-with-scala-10a9937aae57
