@@ -29,41 +29,31 @@ object Main{
     //Filters all tweets in spanish
     val filtered = tweets.filter(_.getLang=="es")
 
-    // Now extract the text of each status update into RDD's using map()
-    val statuses = filtered.map(status => status.getText())
-    statuses.print()
+    // // Now extract the text of each status update into RDD's using map()
+    // val statuses = filtered.map(status => status.getText())
+    // statuses.print()
 
     //Connection and storage of tweets in mongoDB
     filtered.foreachRDD{ x=>
       x.foreach{ x =>
         val mongoClient: MongoClient = MongoClient("mongodb://localhost:27017")
-        val database: MongoDatabase = mongoClient.getDatabase("streamingTwitter")
+        val database: MongoDatabase = mongoClient.getDatabase("distribuidos")
         val collection: MongoCollection[Document] = database.getCollection("tweets")
         val doc = Document(
-          "createdAt" -> x.getCreatedAt,
+          "createdAt" -> x.getCreatedAt.toString,
           "text" -> x.getText,
           "userName" -> x.getUser.getName,
           "userScreenName" -> x.getUser.getScreenName,
           "currentUserRetweetedId" -> x.getCurrentUserRetweetId,
           "favoriteCount" -> x.getFavoriteCount,
           "id" -> x.getId,
-          "inReplyToScreenName" -> x.getInReplyToScreenName,
-          "inReplyToStatusId" -> x.getInReplyToStatusId,
-          "lang" -> x.getLang,
           "retweetCount" -> x.getRetweetCount,
           "isFavorited" -> x.isFavorited,
           "isPossiblySensitive" -> x.isPossiblySensitive,
           "isRetweet" -> x.isRetweet,
           "isRetweeted" -> x.isRetweeted,
-          "isRetweetedByMe" -> x.isRetweetedByMe,
           "isTruncated" -> x.isTruncated,
           "source" -> x.getSource
-          //"contributors" -> x.getContributors,
-          //"geoLocation" -> x.getGeoLocation,
-          //"place" -> x.getPlace,
-          //"retweetedStatus" -> x.getRetweetedStatus,
-          //"scopes" -> x.getScopes,
-
           )
         collection.insertOne(doc).subscribe(new Observer[Completed] {
             override def onNext(result: Completed): Unit = {
@@ -72,9 +62,7 @@ object Main{
             override def onError(e: Throwable) = {
                 println("[!] error: " + e)
             }
-            override def onComplete(): Unit = {
-                println("[?] completed: ")
-            }
+            override def onComplete(): Unit = {}
         })
       }
     }
